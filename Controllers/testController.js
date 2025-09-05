@@ -1,4 +1,3 @@
-
 const db = require('../Config/db'); 
 
 const  { testGetAllEmps,
@@ -48,24 +47,24 @@ async function getEmpDetails(req, res) {
     }
 }
 
-async function postEmpDetails(req,res) {
-    const {ID} = req.params
-    const {Name, PhoneNO, Email, City, Department} = req.body
+async function postEmpDetails(req, res) {
+    const { ID } = req.params;
+    const { Name, PhoneNO, Email, City, Department } = req.body;
     try {
-        await testPostEmpDetails(ID, Name, PhoneNO, Email, City, Department)
+        await testPostEmpDetails(ID,Name, PhoneNO, Email, City, Department);
 
         res.status(200).json({
             success: true,
             message: "User created successfully...!",
-        })
+        });
 
     } catch (error) {
-        console.log(error.message)
+        console.log(error.message);
         res.status(500).json({
             success: false,
             message: "Internal post server error...!",
             error: error.message
-        })
+        });
     }
 }
 

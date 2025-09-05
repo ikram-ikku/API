@@ -34,25 +34,20 @@ async function testGetEmpDetails(ID) {
     }
 }
 
-async function testPostEmpDetails(ID, Name, PhoneNO, Email, City, Department) {
-
+    async function testPostEmpDetails(ID, Name, PhoneNO, Email, City, Department) {
     try {
-        const query = `INSERT INTO  employee (ID, Name, PhoneNO, Email, City, Department) VALUES(?,?,?,?,?,?)`
-        const createEmpDetails = [ID ?? null, Name ?? null, PhoneNO ?? null, Email ?? null, City ?? null, Department ?? null]
-        const [result] = await db.execute(query, createEmpDetails)
+    const query = `INSERT INTO employee (ID, Name, PhoneNO, Email, City, Department)
+    VALUES (?, ?, ?, ?, ?, ?)`;
 
-        return result 
-
+    const empdetails = [ID, Name, PhoneNO, Email, City, Department];
+    const [result] = await db.execute(query, empdetails);
+    return result;
     } catch (error) {
-        console.log(error.message)
-        res.status(500).json({
-            success: false,
-            error: error.message
-        })
+    console.log(error.message);
+    throw error;
     }
-}
-
-
+    }
+    
 async function testUpdateEmpDetails(data, id) {
     const userUpdateDetails = [data.username, data.email]
     const userId = [id.userid]
