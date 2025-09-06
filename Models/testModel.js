@@ -20,8 +20,8 @@ async function testGetEmpDetails(ID) {
     
     try {
         const query = `SELECT * FROM employee WHERE ID = ?`
-        const userId = [ID]
-        const [result] = await db.execute(query, userId)
+        const empId = [ID]
+        const [result] = await db.execute(query, empId)
 
         return result
 
@@ -47,25 +47,25 @@ async function testGetEmpDetails(ID) {
     throw error;
     }
     }
-    
-async function testUpdateEmpDetails(data, id) {
-    const userUpdateDetails = [data.username, data.email]
-    const userId = [id.userid]
+
+async function testUpdateEmpDetails(ID, Name, PhoneNO, Email, City, Department) {
     try {
-        const query = `UPDATE USERDETAILS SET USERNAME = ?, EMAIL = ? WHERE USERID = ${userId}` 
-        
-        const [result] = await db.execute(query, userUpdateDetails)
+        const query = `
+            UPDATE employee 
+            SET Name = ?, PhoneNO = ?, Email = ?, City = ?, Department = ?
+            WHERE ID = ?
+        `;
 
-        return result
+        const empdetails = [Name, PhoneNO, Email, City, Department, ID];
 
+        const [result] = await db.execute(query, empdetails);
+        return result;
     } catch (error) {
-        console.log(error.message)
-        res.status(500).json({
-            success: false,
-            error: error.message
-        })
+        console.log(error.message);
+        throw error; 
     }
 }
+
 
 async function testDeleteEmpDetails(data) {
     const userId = [data.userid]

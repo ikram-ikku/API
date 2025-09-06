@@ -9,9 +9,11 @@ const {
 } = require('../Controllers/testController')
 
 testRoute.get('/getallemp', getAllEmps)
-testRoute.get('/getemp/:userid', getEmpDetails)
-testRoute.delete('/deleteemp/:userid', deleteEmpDetails)
+testRoute.get('/getemp/:ID', getEmpDetails)
 testRoute.post('/addemp/:ID', postEmpDetails)
-testRoute.put('/updateuser/:userid', updateEmpDetails)
+testRoute.put('/updateemp/:ID', updateEmpDetails)
+testRoute.delete('/deleteemp/:ID', deleteEmpDetails)
+
+
 
 module.exports = testRoute

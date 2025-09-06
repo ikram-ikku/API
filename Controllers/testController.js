@@ -27,9 +27,9 @@ async function getAllEmps(req, res) {
 }
 
 async function getEmpDetails(req, res) {
-    const { userid } = req.params;
+    const { ID } = req.params;
     try {
-        const response = await testGetEmpDetails(userid);
+        const response = await testGetEmpDetails(ID);
 
         res.status(200).json({
             success: true,
@@ -69,22 +69,22 @@ async function postEmpDetails(req, res) {
 }
 
 async function updateEmpDetails(req, res) {
-    const data = req.body
-    const id = req.params
+    const { ID } = req.params;
+    const { Name, PhoneNO, Email, City, Department } = req.body;
     try {
-        await testUpdateEmpDetails(data, id)
+        await testUpdateEmpDetails(ID, Name, PhoneNO, Email, City, Department);
 
         res.status(200).json({
             success: true,
             message: "User updated successfully...!"
-        })
+        });
     } catch (error) {
-        console.log(error.message)
+        console.log(error.message);
         res.status(500).json({
             success: false,
             message: "Internal server error...!",
             error: error.message
-        })
+        });
     }
 }
 
